@@ -315,5 +315,20 @@ function addCheckboxEventListeners() {
 .navbar-toggler-icon::after {
     top: 10px;
 }
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+    .custom-checkbox {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border: 2px solid #000; /* Membuat border lebih tebal */
+        border-radius: 3px; /* Membuat sudut kotak checkbox melengkung */
+        appearance: none; /* Menghilangkan tampilan default */
+        -webkit-appearance: none; /* Menghilangkan tampilan default untuk browser Webkit */
+        -moz-appearance: none; /* Menghilangkan tampilan default untuk browser Firefox */
+    }
 </style>
 @endsection

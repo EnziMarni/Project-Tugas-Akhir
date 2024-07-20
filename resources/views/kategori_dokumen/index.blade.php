@@ -98,7 +98,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="nama_dokumen" class="form-label">Nama Dokumen</label>
+                                    <label for="nama_dokumen">Nama Dokumen</label>
                                     <input type="text" class="form-control" id="nama_dokumen" name="nama_dokumen" required>
                                 </div>
                             </div>

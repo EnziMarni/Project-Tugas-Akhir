@@ -2,9 +2,8 @@
 
 @section('content')
 @if(auth()->check() && (auth()->user()->jabatan === 'Kaprodi' || auth()->user()->jabatan === 'Admin'))
-    <div class="container-fluid mt-4">
-        <div class="row">
-            <!-- Sidebar -->
+<div class="navigasi" style="margin-top:50px">
+<div class="d-flex">
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
                 <div class="position-sticky">
                     <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="nama_jabatan" class="form-label">Nama Jabatan</label>
+                                        <label for="nama_jabatan">Nama Jabatan</label>
                                         <input type="text" class="form-control" id="nama_jabatan" name="nama_jabatan" required>
                                     </div>
                                 </div>

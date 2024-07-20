@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="nama_validasi" class="form-label">Nama Validasi</label>
+                                        <label for="nama_validasi">Nama Validasi</label>
                                         <input type="text" class="form-control" id="nama_validasi" name="nama_validasi" required>
                                     </div>
                                 </div>
