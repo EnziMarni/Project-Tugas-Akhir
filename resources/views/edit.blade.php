@@ -3,25 +3,54 @@
 @section('content')
 <div class="navigasi" style="margin-top:50px">
     <div class="d-flex align-items-start">
-        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="position:fixed">
-        <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" id="v-pills-home-tab" href="{{ route('home') }}" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-<a class="nav-link {{ Route::currentRouteName() == 'input-dokumen' ? 'active' : '' }}" id="v-pills-profile-tab" href="{{ route('input-dokumen') }}" role="tab" aria-controls="v-pills-profile" aria-selected="false">Input Dokumen</a>
-<a class="nav-link {{ Route::currentRouteName() == 'list-dokumen' ? 'active' : '' }}" id="v-pills-list-dokumen-tab" href="{{ route('list-dokumen') }}" role="tab" aria-controls="v-pills-list-dokumen" aria-selected="false">List Dokumen</a>
-<a class="nav-link {{ Route::currentRouteName() == 'list-dokumen-user' ? 'active' : '' }}" id="v-pills-list-dokumen-user-tab" href="{{ route('list-dokumen-user') }}" role="tab" aria-controls="v-pills-list-dokumen-user" aria-selected="false">Dokumen Saya</a>
-<a class="nav-link {{ Route::currentRouteName() == 'draft-dokumen' ? 'active' : '' }}" id="v-pills-draft-dokumen-tab" href="{{ route('draft-dokumen') }}" role="tab" aria-controls="v-pills-draft-dokumen" aria-selected="false">Deleted Dokumen</a>
-@if(auth()->check() && auth()->user()->approved && (auth()->user()->jabatan === 'Admin'))
-<a class="nav-link {{ Route::currentRouteName() == 'kategori-dokumen.index' ? 'active' : '' }}" id="v-pills-kategori-tab" href="{{ route('kategori-dokumen.index') }}" role="tab" aria-controls="v-pills-kategori" aria-selected="false">List Kategori</a>
-<a class="nav-link {{ Route::currentRouteName() == 'jabatan.index' ? 'active' : '' }}" id="v-pills-role-tab" href="{{ route('jabatan.index') }}" role="tab" aria-controls="v-pills-role" aria-selected="false">List Role</a>
-<a class="nav-link {{ Route::currentRouteName() == 'list-user' ? 'active' : '' }}" id="v-pills-user-tab" href="{{ route('list-user') }}" role="tab" aria-controls="v-pills-user" aria-selected="false">List User</a>
-<a class="nav-link {{ Route::currentRouteName() == 'validasi.index' ? 'active' : '' }}" id="v-pills-validasi-tab" href="{{ route('validasi.index') }}" role="tab" aria-controls="v-pills-validasi" aria-selected="false">List Validasi</a>
-@endif
-@if(auth()->check() &&  auth()->user()->jabatan === 'Kaprodi')
-<a class="nav-link {{ Route::currentRouteName() == 'list-user' ? 'active' : '' }}" id="v-pills-user-tab" href="{{ route('list-user') }}" role="tab" aria-controls="v-pills-user" aria-selected="false">List User</a>
-@endif
-        </div>
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <div class="position-sticky">
+                <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse d-md-block" id="navbarNav">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'input-dokumen' ? 'active' : '' }}" id="v-pills-profile-tab" href="{{ route('input-dokumen') }}" role="tab" aria-controls="v-pills-profile" aria-selected="false">Input Dokumen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'list-dokumen' ? 'active' : '' }}" id="v-pills-list-dokumen-tab" href="{{ route('list-dokumen') }}" role="tab" aria-controls="v-pills-list-dokumen" aria-selected="false">List Dokumen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'list-dokumen-user' ? 'active' : '' }}" id="v-pills-list-dokumen-user-tab" href="{{ route('list-dokumen-user') }}" role="tab" aria-controls="v-pills-list-dokumen-user" aria-selected="false">Dokumen Saya</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'draft-dokumen' ? 'active' : '' }}" id="v-pills-draft-dokumen-tab" href="{{ route('draft-dokumen') }}" role="tab" aria-controls="v-pills-draft-dokumen" aria-selected="false">Deleted Dokumen</a>
+                        </li>
+                        @if(auth()->check() && auth()->user()->approved && (auth()->user()->jabatan === 'Admin'))
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'kategori-dokumen.index' ? 'active' : '' }}" id="v-pills-kategori-tab" href="{{ route('kategori-dokumen.index') }}" role="tab" aria-controls="v-pills-kategori" aria-selected="false">List Kategori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'jabatan.index' ? 'active' : '' }}" id="v-pills-role-tab" href="{{ route('jabatan.index') }}" role="tab" aria-controls="v-pills-role" aria-selected="false">List Role</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'list-user' ? 'active' : '' }}" id="v-pills-user-tab" href="{{ route('list-user') }}" role="tab" aria-controls="v-pills-user" aria-selected="false">List User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'validasi.index' ? 'active' : '' }}" id="v-pills-validasi-tab" href="{{ route('validasi.index') }}" role="tab" aria-controls="v-pills-validasi" aria-selected="false">List Validasi</a>
+                        </li>
+                        @endif
+                        @if(auth()->check() && auth()->user()->jabatan === 'Kaprodi')
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'list-user' ? 'active' : '' }}" id="v-pills-user-tab" href="{{ route('list-user') }}" role="tab" aria-controls="v-pills-user" aria-selected="false">List User</a>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <h3 class="judul">EDIT DOKUMEN</h3>
+                <h3>EDIT DOKUMEN FILE</h3>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -36,48 +65,48 @@
                     <input type="hidden" name="_method" value="PUT">
                     
                     <div>
-                        <label class="form-label">Judul Dokumen:</label>
-                        <input class="form-control" name="judul_dokumen" value="{{ $document->judul_dokumen }}" style="margin-left:200px">
+                        <label >Judul Dokumen:</label>
+                        <input class="form-control" name="judul_dokumen" value="{{ $document->judul_dokumen }}">
                     </div>
                     <div>
-                        <label class="form-label">Deskripsi Dokumen:</label>
-                        <input class="form-control" name="deskripsi_dokumen" value="{{ $document->deskripsi_dokumen }}" style="margin-left:200px">
+                        <label>Deskripsi Dokumen:</label>
+                        <input class="form-control" name="deskripsi_dokumen" value="{{ $document->deskripsi_dokumen }}">
                     </div>
-                    <div style="margin-left:200px; margin-top:10px">
-    <label>Kategori Dokumen:</label>
-    <select name="kategori_dokumen" id="kategoriDokumen" class="form-control" required>
-        <option value="">Memuat...</option>
-    </select>
-</div>
+                    <div style=" margin-top:10px">
+                        <label>Kategori Dokumen:</label>
+                        <select name="kategori_dokumen" id="kategoriDokumen" class="form-control" required>
+                            <option value="">Memuat...</option>
+                        </select>
+                    </div>
                     <!-- validasi dokumen -->
-                    <div style="margin-left:200px; margin-top:10px">
+                    <div style=" margin-top:10px">
                         <label>Validasi Dokumen:</label>
                         <select name="validasi_dokumen" id="validasiDokumen" class="form-control" required>
                             <option value="">Memuat...</option>
                         </select>
                     </div>
                     <div>
-                        <label for="tahunDokumen" class="form-label">Tahun Dokumen:</label>
-                        <input type="number" class="form-control" name="tahun_dokumen" value="{{ $document->tahun_dokumen }}" id="tahunDokumen" style="margin-left:200px; position:relative; z-index: 1;" min="1900" max="2100" required>
+                        <label for="tahunDokumen" >Tahun Dokumen:</label>
+                        <input type="number" class="form-control" name="tahun_dokumen" value="{{ $document->tahun_dokumen }}" id="tahunDokumen" style=" position:relative; z-index: 1;" min="1900" max="2100" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">File Dokumen:</label>
-                        <input class="form-control" type="file" id="editFile" name="edit_dokumen_file" style="margin-left:200px">
+                        <label for="formFile">File Dokumen:</label>
+                        <input class="form-control" type="file" id="editFile" name="edit_dokumen_file">
                         <div>
-                            <small style="margin-left:200px">File yang sudah diunggah: {{ $document->dokumen_file}}</small>
+                            <small>File yang sudah diunggah: {{ $document->dokumen_file}}</small>
                         </div>
                     </div>
 
 
-                    <div class="form-label">
+                    <div>
                         <div>
                             <label for="tags">Tags:</label>
                             <input type="text" id="tags" name="tags" data-role="tagsinput" class="form-control" value="{{ $document->tags }}" placeholder="Add tags">
                         </div>
                     </div>
         
-                    <div class="form-label">
+                    <div>
                         <label for="permissions">Izinkan siapa saja yang melihat:</label>
                         <div class="row row-cols-3">
                             <div class="col-md-8" id="permissions-container">
@@ -85,11 +114,9 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <button type="submit" class="btn btn-primary" style="margin-left:200px">Update</button>
-                    <a href="{{ route('dokumen-link.edit', $document->id) }}" class="btn btn-primary" style="margin-left:10px">Update Into A Link</a>
-                    <button href="{{ route('list-dokumen') }}" class="btn btn-secondary" style="margin-left:10px">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top:20px">Update</button>
+                    <a href="{{ route('dokumen-link.edit', $document->id) }}" class="btn btn-primary" style="margin-left:10px; margin-top:20px">Update Into A Link</a>
+                    <a href="{{ route('list-dokumen-user') }}" class="btn btn-secondary" style="margin-left:10px; margin-top:20px">Cancel</a>
                 </form>
             </div>
         </div>
@@ -258,4 +285,55 @@
 });
 
 </script>
+
+<style>
+    .nav-link.active {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin: 0;
+    }
+
+    .navbar-toggler-icon {
+        background-image: none;
+        width: 30px;
+        height: 3px;
+        background-color: black;
+        display: inline-block;
+        position: relative;
+    }
+
+    .navbar-toggler-icon::before,
+    .navbar-toggler-icon::after {
+        content: '';
+        width: 30px;
+        height: 3px;
+        background-color: black;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+    }
+
+    .navbar-toggler-icon::before {
+        top: -10px;
+    }
+
+    .navbar-toggler-icon::after {
+        top: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .d-flex.justify-content-between > div {
+            width: 100% !important;
+            margin-top: 0 !important;
+            flex-basis: auto;
+        }
+
+        .d-flex.justify-content-between > div > div {
+            width: 100% !important;
+            flex-direction: column;
+        }
+    }
+</style>
 @endsection

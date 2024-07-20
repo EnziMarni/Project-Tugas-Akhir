@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Riwayat Dokumen: {{ $dokumen->judul_dokumen }}</h1>
+    <h3 style="margin-top:50px">Riwayat Dokumen: {{ $dokumen->judul_dokumen }}</h3>
 
     @if ($histories->isEmpty())
         <p>Tidak ada riwayat untuk dokumen ini.</p>
