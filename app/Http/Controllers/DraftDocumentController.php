@@ -10,21 +10,22 @@ use Illuminate\Support\Facades\Auth;
 class DraftDocumentController extends Controller
 {
     // Menampilkan halaman draft dokumen
-    public function index() {
-        // Assuming you have a Draft model to fetch data from the 'draft' table
+    public function index()
+    {
         $userName = Auth::user()->name;
         $draftDokumens = Draft::where('created_by', $userName)->get();
-    
+
         return view('draft-dokumens.index', compact('draftDokumens'));
     }
-    
 
     public function delete($id)
     {
         $draft = Draft::findOrFail($id);
         $draft->delete();
 
-        return redirect()->route('draft-dokumen')->with('status', 'Dokumen berhasil dihapus dari draft');
+        return redirect()
+            ->route('draft-dokumen')
+            ->with('status', 'Dokumen berhasil dihapus dari draft');
     }
 
     public function unarchive($id)
@@ -47,7 +48,9 @@ class DraftDocumentController extends Controller
         $draft->delete();
 
         // Redirect ke halaman list dokumen dengan pesan sukses
-        return redirect()->route('list-dokumen')->with('status', 'Dokumen berhasil dipindahkan ke list dokumen');
+        return redirect()
+            ->route('list-dokumen')
+            ->with('status', 'Dokumen berhasil dipindahkan ke list dokumen');
     }
 
     public function moveToDraft($id)
@@ -66,9 +69,13 @@ class DraftDocumentController extends Controller
                 'status' => 'draft',
             ]);
 
-            return redirect()->route('dokumens.index')->with('status', 'Dokumen dipindahkan ke draft');
+            return redirect()
+                ->route('dokumens.index')
+                ->with('status', 'Dokumen dipindahkan ke draft');
         } else {
-            return redirect()->route('dokumens.index')->with('error', 'Dokumen tidak ditemukan');
+            return redirect()
+                ->route('dokumens.index')
+                ->with('error', 'Dokumen tidak ditemukan');
         }
     }
 }

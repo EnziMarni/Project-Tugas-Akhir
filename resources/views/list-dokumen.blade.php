@@ -51,13 +51,13 @@
             <div style=" margin-bottom: 10px; display: flex; align-items:center;">
                 <div style="position: relative; width:300px">
                 <form action="{{ route('list-user') }}" method="GET">
-        <div style="position: relative; width: 300px;">
-            <input type="text" class="form-control" placeholder="Search" name="search" id="search" style="padding-right: 30px;" value="{{ request('search') }}">
-            <span style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px; cursor: pointer;" id="searchIcon">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </span>
-        </div>
-    </form>
+                    <div style="position: relative; width: 300px;">
+                        <input type="text" class="form-control" placeholder="Search" name="search" id="search" style="padding-right: 30px;" value="{{ request('search') }}">
+                        <span style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px; cursor: pointer;" id="searchIcon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </form>
                 </div>
                 <select name="yearFilter" class="form-control" id="yearFilter" style="width:300px; margin-left: 100px;">
                     <option value="all">Tahun Dokumen</option>
@@ -93,89 +93,14 @@
                         </tr>
                     </thead>
                     
-  <tbody id="documentTableBody">
-                @php $no = 1; @endphp
-@foreach($documents as $index => $document)
-    @php
-    $views = explode(',', $document->view); // Mengubah string 'view' menjadi array
-    $userJabatan = auth()->user()->jabatan;
-    @endphp
-    @if($userJabatan === 'Admin')
-        <tr data-category="{{ $document->kategori_dokumen }}">
-            <td>{{ $no++ }}</td>
-            <td>{{ $document->judul_dokumen }}</td>
-            <td>{{ $document->deskripsi_dokumen }}</td>
-            <td>{{ $document->kategori_dokumen }}</td>
-            <td>{{ $document->created_by }}</td>
-            <td>{{ $document->validasi_dokumen }}</td>
-            <td style="max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $document->tahun_dokumen }}</td>
-            <td>
-                @if ($document->status_file === 0)
-                    <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" target="_blank">
-                        <i class="fa fa-file" aria-hidden="true"></i> <!-- Menggunakan ikon file -->
-                    </a>
-                @elseif ($document->status_file === 1)
-                    <a href="{{ $document->dokumen_link }}" target="_blank">
-                        <i class="fa fa-link" aria-hidden="true"></i> <!-- Menggunakan ikon link -->
-                    </a>
-                @endif
-            </td>
-            <td>{{ $document->tags }}</td>
-            <td>{{ $document->view }}</td>
-            <td>
-                @if ($document->status_file === 0)
-                    <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem" download>
-                        <i class="fa fa-download"></i>
-                    </a>
-                    <a href="{{ route('dokumen.history', $document->id) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem">
-                        <i class="fa fa-history" aria-hidden="true" style="color: blue;"></i>
-                    </a>
-                @elseif ($document->status_file === 1)
-                    <a href="{{ $document->dokumen_link }}" style="text-decoration: none; display: inline-block; margin-right: 0.3rem" class="btn btn-link p-0" target="_blank">
-                        <i class="fa-solid fa-square-arrow-up-right" aria-hidden="true"></i>
-                    </a>
-                    <a href="{{ route('dokumen.history', $document->id) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem">
-                        <i class="fa fa-history" aria-hidden="true" style="color: blue;"></i>
-                    </a>
-                @endif
-            </td>
-        </tr>
-    @elseif($userJabatan === 'Mahasiswa')
-    <tr data-category="{{ $document->kategori_dokumen }}">
-            <td>{{ $no++ }}</td>
-            <td>{{ $document->judul_dokumen }}</td>
-            <td>{{ $document->deskripsi_dokumen }}</td>
-            <td>{{ $document->kategori_dokumen }}</td>
-            <td>{{ $document->created_by }}</td>
-            <td>{{ $document->validasi_dokumen }}</td>
-            <td style="max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $document->tahun_dokumen }}</td>
-            <td>
-                @if ($document->status_file === 0)
-                    <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" target="_blank">
-                        <i class="fa fa-file" aria-hidden="true"></i> <!-- Menggunakan ikon file -->
-                    </a>
-                @elseif ($document->status_file === 1)
-                    <a href="{{ $document->dokumen_link }}" target="_blank">
-                        <i class="fa fa-link" aria-hidden="true"></i> <!-- Menggunakan ikon link -->
-                    </a>
-                @endif
-            </td>
-            <td>{{ $document->tags }}</td>
-            <td>{{ $document->view }}</td>
-            <td>
-                @if ($document->status_file === 0)
-                    <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem" download>
-                        <i class="fa fa-download"></i>
-                    </a>
-                @elseif ($document->status_file === 1)
-                    <a href="{{ $document->dokumen_link }}" style="text-decoration: none; display: inline-block; margin-right: 0.3rem" class="btn btn-link p-0" target="_blank">
-                        <i class="fa-solid fa-square-arrow-up-right" aria-hidden="true"></i>
-                    </a>
-                @endif
-            </td>
-        </tr>
-    @else
-        @if(in_array($userJabatan, $views) || in_array('All', $views))
+    <tbody id="documentTableBody">
+        @php $no = 1; @endphp
+        @foreach($documents as $index => $document)
+            @php
+            $views = explode(',', $document->view); // Mengubah string 'view' menjadi array
+            $userJabatan = auth()->user()->jabatan;
+            @endphp
+            @if($userJabatan === 'Admin')
             <tr data-category="{{ $document->kategori_dokumen }}">
                 <td>{{ $no++ }}</td>
                 <td>{{ $document->judul_dokumen }}</td>
@@ -215,13 +140,90 @@
                     @endif
                 </td>
             </tr>
+        @elseif($userJabatan === 'Mahasiswa')
+            @if(in_array($userJabatan, $views) || in_array('All', $views))
+                <tr data-category="{{ $document->kategori_dokumen }}">
+                    <td>{{ $no++ }}</td>
+                    <td>{{ $document->judul_dokumen }}</td>
+                    <td>{{ $document->deskripsi_dokumen }}</td>
+                    <td>{{ $document->kategori_dokumen }}</td>
+                    <td>{{ $document->created_by }}</td>
+                    <td>{{ $document->validasi_dokumen }}</td>
+                    <td style="max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $document->tahun_dokumen }}</td>
+                    <td>
+                        @if ($document->status_file === 0)
+                            <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" target="_blank">
+                                <i class="fa fa-file" aria-hidden="true"></i> <!-- Menggunakan ikon file -->
+                            </a>
+                        @elseif ($document->status_file === 1)
+                            <a href="{{ $document->dokumen_link }}" target="_blank">
+                                <i class="fa fa-link" aria-hidden="true"></i> <!-- Menggunakan ikon link -->
+                            </a>
+                        @endif
+                    </td>
+                    <td>{{ $document->tags }}</td>
+                    <td>{{ $document->view }}</td>
+                    <td>
+                        @if ($document->status_file === 0)
+                            <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem" download>
+                                <i class="fa fa-download"></i>
+                            </a>
+                        @elseif ($document->status_file === 1)
+                            <a href="{{ $document->dokumen_link }}" style="text-decoration: none; display: inline-block; margin-right: 0.3rem" class="btn btn-link p-0" target="_blank">
+                                <i class="fa-solid fa-square-arrow-up-right" aria-hidden="true"></i>
+                            </a>
+                        @endif
+                    </td>
+                </tr>
+            @endif
+        @else
+            @if(in_array($userJabatan, $views) || in_array('All', $views))
+                <tr data-category="{{ $document->kategori_dokumen }}">
+                    <td>{{ $no++ }}</td>
+                    <td>{{ $document->judul_dokumen }}</td>
+                    <td>{{ $document->deskripsi_dokumen }}</td>
+                    <td>{{ $document->kategori_dokumen }}</td>
+                    <td>{{ $document->created_by }}</td>
+                    <td>{{ $document->validasi_dokumen }}</td>
+                    <td style="max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $document->tahun_dokumen }}</td>
+                    <td>
+                        @if ($document->status_file === 0)
+                            <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" target="_blank">
+                                <i class="fa fa-file" aria-hidden="true"></i> <!-- Menggunakan ikon file -->
+                            </a>
+                        @elseif ($document->status_file === 1)
+                            <a href="{{ $document->dokumen_link }}" target="_blank">
+                                <i class="fa fa-link" aria-hidden="true"></i> <!-- Menggunakan ikon link -->
+                            </a>
+                        @endif
+                    </td>
+                    <td>{{ $document->tags }}</td>
+                    <td>{{ $document->view }}</td>
+                    <td>
+                        @if ($document->status_file === 0)
+                            <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem" download>
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a href="{{ route('dokumen.history', $document->id) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem">
+                                <i class="fa fa-history" aria-hidden="true" style="color: blue;"></i>
+                            </a>
+                        @elseif ($document->status_file === 1)
+                            <a href="{{ $document->dokumen_link }}" style="text-decoration: none; display: inline-block; margin-right: 0.3rem" class="btn btn-link p-0" target="_blank">
+                                <i class="fa-solid fa-square-arrow-up-right" aria-hidden="true"></i>
+                            </a>
+                            <a href="{{ route('dokumen.history', $document->id) }}" class="btn btn-link p-0" style="display: inline-block; margin-right: 0.3rem">
+                                <i class="fa fa-history" aria-hidden="true" style="color: blue;"></i>
+                            </a>
+                        @endif
+                    </td>
+                </tr>
+            @endif
         @endif
-    @endif
-@endforeach
+    @endforeach
+</tbody>
 
-                </tbody>
-            </table>
-</div>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -277,7 +279,7 @@
                 // Mendapatkan teks judul dokumen dan tag dalam baris saat ini
                 var title = row.cells[1].textContent.trim().toLowerCase();
                 var tags = row.cells[7].textContent.toLowerCase();
-                var tagArray = tags.split(',').map(tag => tag.trim()); // Memecah string tags menjadi array dan trim setiap tag
+                var tagArray = tags.split(',').map(tag => tag.trim()); 
 
                 // Memeriksa apakah judul dokumen atau salah satu tag mengandung kata kunci pencarian
                 var matchFound = title.includes(query) || tagArray.some(tag => tag.includes(query));
@@ -483,8 +485,8 @@
      .nav-link.active {
         background-color: #007bff; /* Warna latar belakang ketika aktif */
         color: white; /* Warna teks ketika aktif */
-        padding: 10px 15px; /* Sesuaikan padding agar sama dengan elemen navigasi lainnya */
-        border-radius: 4px; /* Sesuaikan border-radius jika diperlukan */
+        padding: 10px 15px;
+        border-radius: 4px;
         margin: 0;
 }
 .navbar-toggler-icon {

@@ -65,8 +65,8 @@
                             <label for="jabatan" class="col-md-4 col-form-label text-md-end">Role:</label>
                             <div class="col-md-6">
                                 <select name="jabatan" id="jabatanSelect" class="form-control" required>
-    <option value="">Memuat...</option>
-</select>
+                                    <option value="">Memuat...</option>
+                                </select>
                             </div>
                         </div>
 
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             jabatanSelect.innerHTML = '<option value="" disabled>Pilih Role</option>'; // Reset options
 
             data.forEach(item => {
-                if (item.nama_jabatan !== 'All') { // Tambahkan kondisi di sini
+                if (item.nama_jabatan !== 'All') { 
                     const option = document.createElement('option');
                     option.value = item.nama_jabatan;
                     option.textContent = item.nama_jabatan;

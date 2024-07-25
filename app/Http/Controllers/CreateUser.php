@@ -26,14 +26,15 @@ class CreateUser extends Controller
         if (auth()->check()) {
             $users = User::all();
             $currentUser = auth()->user();
-            
+
             return view('list_user', compact('users', 'currentUser'));
         } else {
             // Redirect atau tangani jika pengguna belum terautentikasi
-            return redirect()->route('login')->with('error', 'You need to login to access this page.');
+            return redirect()
+                ->route('login')
+                ->with('error', 'You need to login to access this page.');
         }
     }
-    
 
     public function store(Request $request)
     {
@@ -55,7 +56,9 @@ class CreateUser extends Controller
 
         Log::info('User successfully created.');
 
-        return redirect()->route('input-user')->with('success', 'User created successfully.');
+        return redirect()
+            ->route('input-user')
+            ->with('success', 'User created successfully.');
     }
 
     public function edit($id)
@@ -83,41 +86,52 @@ class CreateUser extends Controller
 
         $user->save();
 
-        return redirect()->route('list-user')->with('success', 'User updated successfully.');
+        return redirect()
+            ->route('list-user')
+            ->with('success', 'User updated successfully.');
     }
 
     public function approveUser($id)
     {
         $user = User::find($id);
         if ($user) {
-            // Toggle the approved status
             $user->approved = !$user->approved;
             $user->save();
-            return redirect()->route('list-user')->with('success', 'User status updated successfully');
+            return redirect()
+                ->route('list-user')
+                ->with('success', 'User status updated successfully');
         } else {
-            return redirect()->route('list-user')->with('error', 'User not found');
+            return redirect()
+                ->route('list-user')
+                ->with('error', 'User not found');
         }
     }
 
     public function approveAll()
-{
-    if (auth()->user()->jabatan === 'Kaprodi') {
-        // Approve all students
-        User::where('jabatan', 'Mahasiswa')->where('approved', false)->update(['approved' => true]);
+    {
+        if (auth()->user()->jabatan === 'Kaprodi') {
+            // Approve all students
+            User::where('jabatan', 'Mahasiswa')
+                ->where('approved', false)
+                ->update(['approved' => true]);
+        }
+
+        return redirect()
+            ->route('list-user')
+            ->with('success', 'All students approved successfully.');
     }
-    
-    return redirect()->route('list-user')->with('success', 'All students approved successfully.');
-}
 
-public function cancelAll()
-{
-    if (auth()->user()->jabatan === 'Kaprodi') {
-        // Cancel approval for all students
-        User::where('jabatan', 'Mahasiswa')->where('approved', true)->update(['approved' => false]);
+    public function cancelAll()
+    {
+        if (auth()->user()->jabatan === 'Kaprodi') {
+            // Cancel approval for all students
+            User::where('jabatan', 'Mahasiswa')
+                ->where('approved', true)
+                ->update(['approved' => false]);
+        }
+
+        return redirect()
+            ->route('list-user')
+            ->with('success', 'All students approval cancelled successfully.');
     }
-    
-    return redirect()->route('list-user')->with('success', 'All students approval cancelled successfully.');
-}
-
-
 }

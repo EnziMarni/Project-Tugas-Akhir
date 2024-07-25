@@ -107,7 +107,6 @@
                         <label for="permissions">Izinkan siapa saja yang melihat:</label>
                         <div class="row row-cols-3">
                             <div class="col-md-8" id="permissions-container">
-                                <!-- Kontainer untuk checkbox lainnya -->
                             </div>
                         </div>
                     </div>
@@ -125,7 +124,7 @@
             .then(response => response.json())
             .then(data => {
                 const kategoriDokumenSelect = document.getElementById('kategoriDokumen');
-                kategoriDokumenSelect.innerHTML = '<option value="">Pilih Kategori Dokumen</option>'; // Reset options
+                kategoriDokumenSelect.innerHTML = '<option value="">Pilih Kategori Dokumen</option>'; 
 
                 data.forEach(item => {
                     const option = document.createElement('option');
@@ -146,7 +145,7 @@
             .then(response => response.json())
             .then(data => {
                 const validasiDokumenSelect = document.getElementById('validasiDokumen');
-                validasiDokumenSelect.innerHTML = '<option value="">Pilih Validasi Dokumen</option>'; // Reset options
+                validasiDokumenSelect.innerHTML = '<option value="">Pilih Validasi Dokumen</option>'; 
 
                 const currentValidasi = '{{ $document->validasi_dokumen }}';
 
@@ -175,9 +174,8 @@
             .then(response => response.json())
             .then(data => {
                 const permissionsContainer = document.getElementById('permissions-container');
-                permissionsContainer.innerHTML = ''; // Reset options
+                permissionsContainer.innerHTML = ''; 
 
-                // Convert $document->view to a JavaScript array
                 let selectedPermissions = [];
                 @if(isset($document->view))
                     selectedPermissions = {!! json_encode(explode(',', $document->view)) !!};
@@ -191,25 +189,23 @@
                     checkbox.classList.add('form-check-input');
                     checkbox.type = 'checkbox';
                     checkbox.name = 'permissions[]';
-                    checkbox.value = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
-                    checkbox.id = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
+                    checkbox.value = jabatan.nama_jabatan; 
+                    checkbox.id = jabatan.nama_jabatan;
 
-                    // Check if the current checkbox value is in the selectedPermissions array
                     if (selectedPermissions.includes(jabatan.nama_jabatan)) {
                         checkbox.checked = true;
                     }
 
                     const label = document.createElement('label');
                     label.classList.add('form-check-label');
-                    label.htmlFor = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
-                    label.textContent = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
+                    label.htmlFor = jabatan.nama_jabatan; 
+                    label.textContent = jabatan.nama_jabatan; 
 
                     checkboxContainer.appendChild(checkbox);
                     checkboxContainer.appendChild(label);
                     permissionsContainer.appendChild(checkboxContainer);
                 });
 
-                // Add event listeners after checkboxes are added
                 addCheckboxEventListeners();
             })
             .catch(error => {
@@ -256,7 +252,7 @@
         .then(response => response.json())
         .then(data => {
             const kategoriDokumenSelect = document.getElementById('kategoriDokumen');
-            kategoriDokumenSelect.innerHTML = '<option value="">Pilih Kategori Dokumen</option>'; // Reset options
+            kategoriDokumenSelect.innerHTML = '<option value="">Pilih Kategori Dokumen</option>'; 
 
             // Ambil nilai kategori dokumen dari document
             const selectedKategoriDokumen = "{{ $document->kategori_dokumen }}";

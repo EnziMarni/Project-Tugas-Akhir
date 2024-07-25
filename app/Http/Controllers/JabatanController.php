@@ -10,7 +10,7 @@ class JabatanController extends Controller
     public function create()
     {
         $jabatanList = Jabatan::pluck('nama_jabatan')->toArray();
-        $inputType = old('inputType', 'file'); // Default to 'file' if not set
+        $inputType = old('inputType', 'file');
         return view('input_dokumen', compact('jabatanList', 'inputType'));
     }
 
@@ -34,7 +34,9 @@ class JabatanController extends Controller
 
         Jabatan::create($request->all());
 
-        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil ditambahkan.');
+        return redirect()
+            ->route('jabatan.index')
+            ->with('success', 'Jabatan berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -52,7 +54,9 @@ class JabatanController extends Controller
         $jabatan = Jabatan::findOrFail($id);
         $jabatan->update($request->all());
 
-        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil diupdate.');
+        return redirect()
+            ->route('jabatan.index')
+            ->with('success', 'Jabatan berhasil diupdate.');
     }
 
     public function destroy($id)
@@ -60,6 +64,8 @@ class JabatanController extends Controller
         $jabatan = Jabatan::findOrFail($id);
         $jabatan->delete();
 
-        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil dihapus.');
+        return redirect()
+            ->route('jabatan.index')
+            ->with('success', 'Jabatan berhasil dihapus.');
     }
 }

@@ -89,7 +89,7 @@ class DokumenController extends Controller
     public function getKategoriDokumen()
     {
         $kategoriDokumen = KategoriDokumen::all(); // Ambil semua data dari tabel kategori_dokumen
-        return view('get-nama-dokumen', compact('KategoriDokumen')); // Kirim data ke view
+        return view('get-nama-dokumen', compact('KategoriDokumen'));
     }
 
     public function listDokumen()
@@ -108,7 +108,6 @@ class DokumenController extends Controller
     public function edit($id)
     {
         $document = Dokumen::findOrFail($id);
-        // dd($document);
         return view('edit', compact('document'));
     }
 

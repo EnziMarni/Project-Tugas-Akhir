@@ -51,13 +51,13 @@
             <div style=" margin-bottom: 10px; display: flex; align-items:center;">
                 <div style="position: relative; width:300px">
                 <form action="{{ route('list-user') }}" method="GET">
-        <div style="position: relative; width: 300px;">
-            <input type="text" class="form-control" placeholder="Search" name="search" id="search" style="padding-right: 30px;" value="{{ request('search') }}">
-            <span style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px; cursor: pointer;" id="searchIcon">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </span>
-        </div>
-    </form>
+                    <div style="position: relative; width: 300px;">
+                        <input type="text" class="form-control" placeholder="Search" name="search" id="search" style="padding-right: 30px;" value="{{ request('search') }}">
+                        <span style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px; cursor: pointer;" id="searchIcon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </form>
                 </div>
                 <select name="yearFilter" class="form-control" id="yearFilter" style="width:300px; margin-left: 100px;">
                     <option value="all">Tahun Dokumen</option>
@@ -167,9 +167,6 @@
                     @endif
                     @endforeach
                 </tbody>
-
-
-
             </table>
             </div>
         </div>
@@ -226,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mendapatkan teks judul dokumen dan tag dalam baris saat ini
                 var title = row.cells[1].textContent.trim().toLowerCase();
                 var tags = row.cells[7].textContent.toLowerCase();
-                var tagArray = tags.split(',').map(tag => tag.trim()); // Memecah string tags menjadi array dan trim setiap tag
+                var tagArray = tags.split(',').map(tag => tag.trim()); 
 
                 // Memeriksa apakah judul dokumen atau salah satu tag mengandung kata kunci pencarian
                 var matchFound = title.includes(query) || tagArray.some(tag => tag.includes(query));
@@ -432,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function() {
      .nav-link.active {
         background-color: #007bff; /* Warna latar belakang ketika aktif */
         color: white; /* Warna teks ketika aktif */
-        padding: 10px 15px; /* Sesuaikan padding agar sama dengan elemen navigasi lainnya */
-        border-radius: 4px; /* Sesuaikan border-radius jika diperlukan */
+        padding: 10px 15px; 
+        border-radius: 4px;
         margin: 0;
 }
     @media (max-width: 768px) {

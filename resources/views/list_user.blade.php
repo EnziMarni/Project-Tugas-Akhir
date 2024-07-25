@@ -149,8 +149,8 @@
     .nav-link.active {
         background-color: #007bff; /* Warna latar belakang ketika aktif */
         color: white; /* Warna teks ketika aktif */
-        padding: 10px 15px; /* Sesuaikan padding agar sama dengan elemen navigasi lainnya */
-        border-radius: 4px; /* Sesuaikan border-radius jika diperlukan */
+        padding: 10px 15px; 
+        border-radius: 4px;
         margin: 0;
     }
 

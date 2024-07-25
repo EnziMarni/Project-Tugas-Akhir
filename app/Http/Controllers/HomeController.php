@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); // Ensure authentication is required for this controller
+        $this->middleware('auth');
     }
 
     /**
@@ -24,10 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Count the number of documents
         $documentCount = Dokumen::count();
 
         return view('home', compact('documentCount'));
     }
 }
-

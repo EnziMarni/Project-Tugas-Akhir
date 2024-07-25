@@ -21,7 +21,6 @@
                         <p class="card-text">
                             <i class="fas fa-envelope"></i> <strong>{{ $user->email }}</strong>
                         </p>
-                        <!-- Tambahkan informasi lainnya yang ingin ditampilkan -->
                     </div>
                 </div>
                 <a href="{{ route('home') }}" class="btn btn-primary mt-3">

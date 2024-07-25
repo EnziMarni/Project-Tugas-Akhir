@@ -27,13 +27,13 @@
         </div>
    
         <div class="row mb-3">
-                        <label for="jabatan" class="col-sm-2 col-form-label">Role:</label>
-                        <div class="col-sm-10">
-                            <select name="jabatan" id="jabatanSelect" class="form-control" required>
-                                <option value="">Memuat...</option>
-                            </select>
-                        </div>
+             <label for="jabatan" class="col-sm-2 col-form-label">Role:</label>
+                    <div class="col-sm-10">
+                        <select name="jabatan" id="jabatanSelect" class="form-control" required>
+                            <option value="">Memuat...</option>
+                        </select>
                     </div>
+        </div>
 
         <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-primary me-2">Update</button>
@@ -47,17 +47,17 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             const jabatanSelect = document.getElementById('jabatanSelect');
-            jabatanSelect.innerHTML = '<option value="" disabled>Pilih Role</option>'; // Reset options
+            jabatanSelect.innerHTML = '<option value="" disabled>Pilih Role</option>'; 
 
-            const userJabatan = '{{ $user->jabatan }}'; // Ambil nilai jabatan dari $user
+            const userJabatan = '{{ $user->jabatan }}'; 
 
             data.forEach(item => {
-                if (item.nama_jabatan !== 'All') { // Tambahkan kondisi di sini
+                if (item.nama_jabatan !== 'All') { 
                     const option = document.createElement('option');
                     option.value = item.nama_jabatan;
                     option.textContent = item.nama_jabatan;
                     if (item.nama_jabatan === userJabatan) {
-                        option.selected = true; // Tandai sebagai selected jika cocok
+                        option.selected = true; 
                     }
                     jabatanSelect.appendChild(option);
                 }

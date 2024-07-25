@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dokumen;
 use App\Models\Draft;
 use App\Models\History;
-use App\Models\KategoriDokumenController ;
+use App\Models\KategoriDokumenController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -21,8 +21,8 @@ class LinkController extends Controller
 
     public function input()
     {
-        $inputType = 'link'; // Set default input type to link
-        $jabatanList = []; // Retrieve the list of positions from the database or another source
+        $inputType = 'link';
+        $jabatanList = [];
         return view('input_dokumen_link', compact('inputType', 'jabatanList'));
     }
 
@@ -66,13 +66,18 @@ class LinkController extends Controller
 
         // Periksa jika dokumen berhasil disimpan
         if (!$dokumen) {
-            return redirect()->back()->withInput()->withErrors(['error' => 'Gagal menyimpan dokumen. Silakan coba lagi.']);
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors([
+                    'error' => 'Gagal menyimpan dokumen. Silakan coba lagi.',
+                ]);
         }
 
-        return redirect()->route('list-dokumen')->with('success', 'Dokumen berhasil ditambahkan!');
+        return redirect()
+            ->route('list-dokumen')
+            ->with('success', 'Dokumen berhasil ditambahkan!');
     }
-
-    
 
     public function getKategoriDokumen()
     {
@@ -88,7 +93,9 @@ class LinkController extends Controller
 
     public function processList(Request $request)
     {
-        return redirect()->route('list-dokumen')->with('success', 'Data berhasil diproses.');
+        return redirect()
+            ->route('list-dokumen')
+            ->with('success', 'Data berhasil diproses.');
     }
 
     public function edit($id)
@@ -100,7 +107,7 @@ class LinkController extends Controller
     public function update(Request $request, $id)
     {
         $document = Dokumen::findOrFail($id);
-    
+
         History::create([
             'dokumen_id' => $document->id,
             'judul_dokumen' => $document->judul_dokumen,
@@ -110,42 +117,55 @@ class LinkController extends Controller
             'tahun_dokumen' => $document->tahun_dokumen,
             'dokumen_file' => $document->dokumen_file,
             'tags' => $document->tags,
-            'created_by' =>$document->created_by,
+            'created_by' => $document->created_by,
             'view' => $document->view,
         ]);
-    
+
         $validatedData = $request->validate([
             'judul_dokumen' => 'required|string|max:255',
             'deskripsi_dokumen' => 'required|string',
             'kategori_dokumen' => 'required|string',
             'validasi_dokumen' => 'required|string',
             'tahun_dokumen' => 'required|integer',
-            'edit_dokumen_file' => 'nullable|file|mimes:pdf,docx,jpeg,png,jpg|max:2048',
+            'edit_dokumen_file' =>
+                'nullable|file|mimes:pdf,docx,jpeg,png,jpg|max:2048',
             'tags' => 'nullable|string',
             'created_by' => 'nullable|string',
             'view' => 'array',
         ]);
         // Handle file yang diunggah
         if ($request->hasFile('edit_dokumen_file')) {
-            $fileName = str_replace(' ', '_', $request->edit_dokumen_file->getClientOriginalName());
+            $fileName = str_replace(
+                ' ',
+                '_',
+                $request->edit_dokumen_file->getClientOriginalName()
+            );
 
             // Simpan file lama ke dalam history
-            Storage::disk('public')->copy('documents/' . $document->dokumen_file, 'documents/history/' . $document->dokumen_file);
+            Storage::disk('public')->copy(
+                'documents/' . $document->dokumen_file,
+                'documents/history/' . $document->dokumen_file
+            );
 
             // Simpan file baru
-            $path = $request->edit_dokumen_file->storeAs('public/documents', $fileName);
+            $path = $request->edit_dokumen_file->storeAs(
+                'public/documents',
+                $fileName
+            );
             $document->dokumen_file = $fileName;
         }
 
-         // Menggabungkan nilai checkbox menjadi string terpisah koma
-         $viewPermissions = implode(',', $request->permissions ?? []);
-         $document->view = $viewPermissions;
+        // Menggabungkan nilai checkbox menjadi string terpisah koma
+        $viewPermissions = implode(',', $request->permissions ?? []);
+        $document->view = $viewPermissions;
 
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+            return redirect()
+                ->route('login')
+                ->with('error', 'Silakan login terlebih dahulu.');
         }
-    
+
         $document->judul_dokumen = $validatedData['judul_dokumen'];
         $document->deskripsi_dokumen = $validatedData['deskripsi_dokumen'];
         $document->kategori_dokumen = $validatedData['kategori_dokumen'];
@@ -155,23 +175,29 @@ class LinkController extends Controller
         $document->created_by = $validatedData['created_by'] ?? $user->name;
 
         $document->save();
-    
+
         Log::info('Document after update', ['document' => $document]);
 
-        return redirect()->route('list-dokumen')->with('success', 'Details dokumen berhasil diperbarui.');
+        return redirect()
+            ->route('list-dokumen')
+            ->with('success', 'Details dokumen berhasil diperbarui.');
     }
 
     public function moveToDraft($id)
     {
         $document = Dokumen::findOrFail($id);
 
-        Log::info('Menghapus dokumen dengan ID: ' . $id, ['document' => $document]);
+        Log::info('Menghapus dokumen dengan ID: ' . $id, [
+            'document' => $document,
+        ]);
 
         $user = Auth::user();
         Log::info('User info:', ['user' => $user]);
 
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+            return redirect()
+                ->route('login')
+                ->with('error', 'Silakan login terlebih dahulu.');
         }
 
         $draft = Draft::create([
@@ -190,9 +216,13 @@ class LinkController extends Controller
 
         $document->delete();
 
-        Log::info('Dokumen dihapus dari tabel dokumens', ['document' => $document]);
+        Log::info('Dokumen dihapus dari tabel dokumens', [
+            'document' => $document,
+        ]);
 
-        return redirect()->route('list-dokumen')->with('success', 'Dokumen berhasil dihapus');
+        return redirect()
+            ->route('list-dokumen')
+            ->with('success', 'Dokumen berhasil dihapus');
     }
 
     public function getUserName()
@@ -204,7 +234,23 @@ class LinkController extends Controller
     public function history($id)
     {
         $dokumen = Dokumen::findOrFail($id);
-        $histories = $dokumen->histories()->orderBy('created_at', 'desc')->get(['id','judul_dokumen', 'deskripsi_dokumen', 'kategori_dokumen', 'validasi_dokumen','status_file', 'tahun_dokumen','dokumen_link', 'dokumen_file', 'tags', 'created_by','view']);
+        $histories = $dokumen
+            ->histories()
+            ->orderBy('created_at', 'desc')
+            ->get([
+                'id',
+                'judul_dokumen',
+                'deskripsi_dokumen',
+                'kategori_dokumen',
+                'validasi_dokumen',
+                'status_file',
+                'tahun_dokumen',
+                'dokumen_link',
+                'dokumen_file',
+                'tags',
+                'created_by',
+                'view',
+            ]);
         return view('history', compact('dokumen', 'histories'));
     }
 

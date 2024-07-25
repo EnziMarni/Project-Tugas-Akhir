@@ -23,14 +23,14 @@
 
         <!-- Modal -->
         <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg"> <!-- Perubahan utama di sini untuk modal-lg -->
+            <div class="modal-dialog modal-lg"> 
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Riwayat Dokumen: {{ $dokumen->judul_dokumen }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="table-responsive"> <!-- Tambahkan class table-responsive untuk tabel yang responsif -->
+                        <div class="table-responsive"> 
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -57,18 +57,18 @@
                                             <td>{{ $history->validasi_dokumen }}</td>
                                             <td>{{ $history->tahun_dokumen }}</td>
                                             @if ($history->status_file === 0)
-    <td>
-        <a href="{{ asset('storage/documents/' . $history->dokumen_file) }}" target="_blank">
-            <i class="fa fa-file"></i>
-        </a>
-    </td>
-@elseif ($history->status_file === 1)
-    <td>
-        <a href="{{ $history->dokumen_link }}" target="_blank">
-            <i class="fa fa-link"></i>
-        </a>
-    </td>
-@endif
+                                            <td>
+                                                <a href="{{ asset('storage/documents/' . $history->dokumen_file) }}" target="_blank">
+                                                    <i class="fa fa-file"></i>
+                                                </a>
+                                            </td>
+                                        @elseif ($history->status_file === 1)
+                                            <td>
+                                                <a href="{{ $history->dokumen_link }}" target="_blank">
+                                                    <i class="fa fa-link"></i>
+                                                </a>
+                                            </td>
+                                        @endif
 
                                             <td>{{ $history->tags }}</td>
                                             <td>{{ \Carbon\Carbon::parse($history->created_at)->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}</td>

@@ -84,7 +84,7 @@
                     @endforeach
                 </tbody>
             </table>
-</div>
+        </div>
             <!-- Modal for Adding Category -->
             <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -109,7 +109,7 @@
                     </form>
                 </div>
             </div>
-</div>
+        </div>
     </div>
 </div>
 

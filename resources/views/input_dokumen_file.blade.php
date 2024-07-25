@@ -103,7 +103,6 @@
                         <label for="permissions">Izinkan siapa saja yang melihat:</label>
                         <div class="row row-cols-3">
                             <div class="col-md-8" id="permissions-container">
-                                <!-- Kontainer untuk checkbox lainnya -->
                             </div>
                         </div>
                     </div>
@@ -139,14 +138,11 @@
             }
         }
 
-        // Call toggleInputFields once to initialize based on the current selection
         toggleInputFields();
 
-        // Add event listener to call toggleInputFields every time the dropdown value changes
         document.getElementById('inputType').addEventListener('change', toggleInputFields);
     });
 
-    // Ambil nama pengguna dari server dan simpan di localStorage
     fetch('/get-user-name')
         .then(response => response.json())
         .then(data => {
@@ -155,9 +151,8 @@
             // Ambil nama pengguna dari local storage
             var userName = localStorage.getItem('user_active');
 
-            // Set nilai input dengan id 'Create_by' menjadi nilai nama pengguna dari local storage
             if (userName) {
-                document.getElementById('User').value = userName; // Menggunakan 'User' sebagai id input
+                document.getElementById('User').value = userName; 
             }
         });
 
@@ -167,7 +162,7 @@
     .then(response => response.json())
     .then(data => {
         const permissionsContainer = document.getElementById('permissions-container');
-        permissionsContainer.innerHTML = ''; // Reset options
+        permissionsContainer.innerHTML = ''; 
 
         data.forEach(jabatan => {
             const checkboxContainer = document.createElement('div');
@@ -177,20 +172,19 @@
             checkbox.classList.add('form-check-input');
             checkbox.type = 'checkbox';
             checkbox.name = 'permissions[]';
-            checkbox.value = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
-            checkbox.id = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
+            checkbox.value = jabatan.nama_jabatan; 
+            checkbox.id = jabatan.nama_jabatan; 
 
             const label = document.createElement('label');
             label.classList.add('form-check-label');
-            label.htmlFor = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
-            label.textContent = jabatan.nama_jabatan; // Sesuaikan dengan field yang sesuai dari JSON response
+            label.htmlFor = jabatan.nama_jabatan; 
+            label.textContent = jabatan.nama_jabatan; 
 
             checkboxContainer.appendChild(checkbox);
             checkboxContainer.appendChild(label);
             permissionsContainer.appendChild(checkboxContainer);
         });
 
-        // Add event listeners after checkboxes are added
         addCheckboxEventListeners();
     })
     .catch(error => {
@@ -237,7 +231,7 @@ function addCheckboxEventListeners() {
             .then(response => response.json())
             .then(data => {
                 const kategoriDokumenSelect = document.getElementById('kategoriDokumen');
-                kategoriDokumenSelect.innerHTML = '<option value="">Pilih Kategori Dokumen</option>'; // Reset options
+                kategoriDokumenSelect.innerHTML = '<option value="">Pilih Kategori Dokumen</option>'; 
 
                 data.forEach(item => {
                     const option = document.createElement('option');
@@ -254,16 +248,16 @@ function addCheckboxEventListeners() {
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-        fetch('{{ route('get-validasi-dokumen') }}') // Ganti dengan endpoint yang sesuai untuk mendapatkan data validasi dokumen
+        fetch('{{ route('get-validasi-dokumen') }}') 
             .then(response => response.json())
             .then(data => {
                 const validasiDokumenSelect = document.getElementById('validasiDokumen');
-                validasiDokumenSelect.innerHTML = '<option value="">Pilih Validasi Dokumen</option>'; // Reset options
+                validasiDokumenSelect.innerHTML = '<option value="">Pilih Validasi Dokumen</option>'; 
 
                 data.forEach(item => {
                     const option = document.createElement('option');
-                    option.value = item; // Sesuaikan dengan field yang sesuai dari JSON response
-                    option.textContent = item; // Sesuaikan dengan field yang sesuai dari JSON response
+                    option.value = item; 
+                    option.textContent = item; 
                     validasiDokumenSelect.appendChild(option);
                 });
             })
@@ -279,8 +273,8 @@ function addCheckboxEventListeners() {
      .nav-link.active {
         background-color: #007bff; /* Warna latar belakang ketika aktif */
         color: white; /* Warna teks ketika aktif */
-        padding: 10px 15px; /* Sesuaikan padding agar sama dengan elemen navigasi lainnya */
-        border-radius: 4px; /* Sesuaikan border-radius jika diperlukan */
+        padding: 10px 15px; 
+        border-radius: 4px;
         margin: 0;
 }
 .navbar-toggler-icon {

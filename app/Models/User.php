@@ -16,23 +16,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'jabatan',
-        'approved', // Include 'approved' if you want to set this value
-    ];
+    protected $fillable = ['name', 'email', 'password', 'jabatan', 'approved'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
@@ -41,7 +32,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'approved' => 'boolean', // Treat 'approved' as boolean
+        'approved' => 'boolean',
     ];
 }
-
