@@ -151,16 +151,21 @@
                     <td>{{ $document->validasi_dokumen }}</td>
                     <td style="max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $document->tahun_dokumen }}</td>
                     <td>
-                        @if ($document->status_file === 0)
-                            <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" target="_blank">
-                                <i class="fa fa-file" aria-hidden="true"></i> <!-- Menggunakan ikon file -->
-                            </a>
-                        @elseif ($document->status_file === 1)
+                        @if ($document->status_file === 1 && !empty($document->dokumen_link))
                             <a href="{{ $document->dokumen_link }}" target="_blank">
                                 <i class="fa fa-link" aria-hidden="true"></i> <!-- Menggunakan ikon link -->
                             </a>
+                        @elseif ($document->status_file === 0 && !empty($document->dokumen_file))
+                            <a href="{{ asset('storage/documents/' . $document->dokumen_file) }}" target="_blank">
+                                <i class="fa fa-file" aria-hidden="true"></i> <!-- Menggunakan ikon file -->
+                            </a>
+                        @else
+                            <p>Unknown status or missing data</p>
+                            <p>Status File: {{ $document->status_file }}</p> <!-- Debugging: tampilkan status_file -->
+                            <p>Document Link: {{ $document->dokumen_link }}</p> <!-- Debugging: tampilkan dokumen_link -->
                         @endif
                     </td>
+
                     <td>{{ $document->tags }}</td>
                     <td>{{ $document->view }}</td>
                     <td>

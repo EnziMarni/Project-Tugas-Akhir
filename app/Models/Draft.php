@@ -9,15 +9,18 @@ class Draft extends Model
     protected $table = 'draft';
 
     protected $fillable = [
-            'judul_dokumen',
-            'created_by',
-            'deskripsi_dokumen',
-            'kategori_dokumen',
-            'validasi_dokumen',
-            'tahun_dokumen',
-            'dokumen_file',
-            'tags',
-            'status',
+        'judul_dokumen',
+        'created_by',
+        'deskripsi_dokumen',
+        'kategori_dokumen',
+        'validasi_dokumen',
+        'status_file',
+        'tahun_dokumen',
+        'dokumen_file',
+        'dokumen_link',
+        'tags',
+        'status',
+        'view',
     ];
 
     public function dokumen()

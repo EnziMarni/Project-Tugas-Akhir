@@ -221,9 +221,12 @@ class DokumenController extends Controller
             'validasi_dokumen' => $document->validasi_dokumen,
             'tahun_dokumen' => $document->tahun_dokumen,
             'dokumen_file' => $document->dokumen_file,
+            'dokumen_link' => $document->dokumen_link,
             'tags' => $document->tags,
             'status' => 'draft',
             'created_by' => $document->created_by,
+            'view' => $document->view,
+            'status_file' => $document->status_file,
         ]);
 
         Log::info('Dokumen dipindahkan ke draft', ['draft' => $draft]);
@@ -235,7 +238,7 @@ class DokumenController extends Controller
         ]);
 
         return redirect()
-            ->route('list-dokumen')
+            ->route('list-dokumen-user')
             ->with('success', 'Dokumen berhasil dihapus');
     }
 
